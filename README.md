@@ -4,13 +4,13 @@
 
 The following repository contains the files and code to be used in the browser based machine learning course, presented at [EBF (Emerging Business Factory)](http://www.emergingbusinessfactory.com/) incubator. The course is essentially an introduction to webgl based computations and machine learning. It is structured in the following manner:
 
-- **introduction to webgl**
+- **[webgl](https://www.khronos.org/webgl/wiki/Main_Page)**
   - What is webgl?
   - Demo of simple shape drawing in webgl
   - computations on webgl
   - Matrix multiplication demo
   
-- **Introduction to tensorflowJS**
+- **[tensorflowJS](https://js.tensorflow.org/)**
 	- Demo of linear regression
 	- Introduce Kaggle and its competitions
 	- Import data *(data clean up)*
