@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="Web/css/ibm-plex.css">
+  <title>GPU Computation</title>
+</head>
+<body>
+<div class="container">
+  <h1 class="title">GPU Computations Demo</h1>
+  <p class="description">This demo was presented at the <a href="http://www.emergingbusinessfactory.com/">EBF</a> course on Machine learning on the browser. It concern a matrix multiplication of <a href="#">A</a>x<a href="#">B</a> using GPU with webgl framework <a href="http://gpu.rocks/">GPU JS</a>. The performance of the gpu based code is then compared to the code running on CPU.
+  </p>
+
+  <div class="flex-box">
+    <div class="box">
+      <div class="box-title">GPU Kernel</div>
+      <div class="box-body" id="gpu-box">
+        <div class="elTime">Duration : <span class='showTime' id="gpuElTime">0.0</span></div>
+        <input class='size-input-text' id="gpu-mult-size" type="text" placeholder="size" />
+        <button id="btn-compute-gpu" class="btn" type="button" name="button">Compute</button>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-title">CPU Function</div>
+      <div class="box-body" id="cpu-box">
+        <div class="elTime">Duration : <span class='showTime' id="cpuElTime">0.0</span></div>
+        <input class='size-input-text' id="cpu-mult-size" type="text" placeholder="size" />
+        <button id="btn-compute-cpu" class="btn" type="button" name="button">Compute</button>
+      </div>
+    </div>
+  </div>
+  <p class="footer">made by <a href="https://github.com/fuzzyAccent">M.GHARAFI</a> using <a href="http://gpu.rocks/">gpu.js</a></p>
+</div>
+<script src="gpu.js" charset="utf-8"></script>
+<script src="script.js" charset="utf-8"></script>
+</body>
+</html>

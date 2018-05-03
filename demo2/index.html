@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>WebGL demo</title>
+</head>
+<body>
+  <div class="slider_container">
+    <div class="color">
+      <span>red : </span>
+      <input id="slider_red" type="range" min="0" max="255" value="50">
+      <span id="red_value"></span>
+    </div>
+    <div class="color">
+      <span>green : </span>
+      <input id="slider_green" type="range" min="0" max="255" value="50">
+      <span id="green_value"></span>
+    </div>
+    <div class="color">
+      <span>blue : </span>
+      <input id="slider_blue" type="range" min="0" max="255" value="50">
+      <span id="blue_value"></span>
+    </div>
+  </div>
+  <canvas id="c" width="1600" height="1600"></canvas>
+  <!-- vertex shader -->
+  <script id="2d-vertex-shader" type="x-shader/x-vertex">
+  attribute vec2 a_position;
+  attribute vec4 a_color;
+
+  uniform mat3 u_matrix;
+
+  varying vec4 v_color;
+
+  void main() {
+    // Multiply the position by the matrix.
+    gl_Position = vec4((u_matrix * vec3(a_position, 1)).xy, 0, 1);
+
+    // Convert from clipspace to colorspace.
+    // Clipspace goes -1.0 to +1.0
+    // Colorspace goes from 0.0 to 1.0
+    v_color = a_color;
+  }
+  </script>
+  <!-- fragment shader -->
+  <script id="2d-fragment-shader" type="x-shader/x-fragment">
+  precision mediump float;
+
+  varying vec4 v_color;
+
+  void main() {
+    gl_FragColor = v_color;
+  }
+  </script>
+  <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+  <!-- <script src="https://webglfundamentals.org/webgl/resources/webgl-lessons-ui.js"></script> -->
+  <!-- <script src="https://webglfundamentals.org/webgl/resources/webgl-lessons-helper.js"></script> -->
+  <script src="m3.js" charset="utf-8"></script>
+  <script src="script.js" charset="utf-8"></script>
+</body>
+</html>

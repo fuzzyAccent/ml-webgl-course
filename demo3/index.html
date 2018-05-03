@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Image processing</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <!-- vertex shader -->
+    <script id="2d-vertex-shader" type="x-shader/x-vertex">
+    attribute vec2 a_position;
+    attribute vec2 a_texCoord;
+
+    uniform vec2 u_resolution;
+
+    varying vec2 v_texCoord;
+
+    void main() {
+       // convert the rectangle from pixels to 0.0 to 1.0
+       vec2 zeroToOne = a_position / u_resolution;
+
+       // convert from 0->1 to 0->2
+       vec2 zeroToTwo = zeroToOne * 2.0;
+
+       // convert from 0->2 to -1->+1 (clipspace)
+       vec2 clipSpace = zeroToTwo - 1.0;
+
+       gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
+
+       // pass the texCoord to the fragment shader
+       // The GPU will interpolate this value between points.
+       v_texCoord = a_texCoord;
+    }
+    </script>
+    <!-- fragment shader -->
+    <script id="2d-fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+
+    // our texture
+    uniform sampler2D u_image;
+    uniform vec2 u_textureSize;
+
+    // the texCoords passed in from the vertex shader.
+    varying vec2 v_texCoord;
+
+    void main() {
+      // compute 1 pixel in texture coordinates.
+      vec2 onePixel = vec2(1.0, 1.0) / u_textureSize;
+
+      // average the left, middle, and right pixels.
+    gl_FragColor = (
+        texture2D(u_image, v_texCoord) +
+        texture2D(u_image, v_texCoord + vec2(onePixel.x, 0.0)).rbga +
+        texture2D(u_image, v_texCoord + vec2(-onePixel.x, 0.0))) / 3.0;
+    }
+    </script>
+
+
+
+
+
+    <script src="webgl-utils.js" charset="utf-8"></script>
+    <!-- <script src="https://webglfundamentals.org/webgl/resources/webgl-lessons-helper.js"></script> -->
+    <script src="m3.js" charset="utf-8"></script>
+    <script src="script.js" charset="utf-8"></script>
+  </body>
+</html>
